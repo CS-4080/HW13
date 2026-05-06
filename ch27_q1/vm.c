@@ -581,8 +581,12 @@ static InterpretResult run() {
         if (tableGet(&instance->fields, name, &value)) {
           pop(); // Instance.
           push(value);
-          break;
+        } else {
+          // Instead of aborting, return nil
+          pop();
+          push(NIL_VAL);
         }
+        break;
 //> get-undefined
 
 //< get-undefined
